@@ -1,5 +1,5 @@
 library(MASS)
-makeCacheMatrix <- function(x = matrix()) {
+makeCacheMatrix <- function(x = matrix()) {  ##makeCacheMatrix is made a function
   inv <- NULL
   set <- function(y){
     x <<- y
@@ -8,18 +8,16 @@ makeCacheMatrix <- function(x = matrix()) {
   get <- function()x
   setinv <- function(inverse) inv <<- inverse
   getinv <- function() {
-    inver<-ginv(x)
+    inver<-ginv(x)   ##gives the inverse
     inver%*%x
   } 
   list(set = set, get = get, 
        setinv = setinv, 
-       getinv = getinv)
-}
-
-##Please include your own comment to explain your code (Required in Rubric)
+       getinv = getinv
+       
 
 cacheSolve <- function(x, ...) {
-  ## Return a matrix that is the inverse of 'x'
+                         ## Return a matrix that is the inverse of 'x'
   inv <- x$getinv()
   if(!is.null(inv)){
     message("getting cached data")
@@ -28,5 +26,5 @@ cacheSolve <- function(x, ...) {
   data() <- x$get()
   inv <- solve(data(),...)
   x$setinv(inv)
-  inv  ##return a matrix that is inverse of 'x'
+  inv                     ##return a matrix that is inverse of 'x'
 }
